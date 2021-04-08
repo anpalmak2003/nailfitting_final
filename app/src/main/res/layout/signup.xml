@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="252dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Nickname"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="252dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="252dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/country"
+        android:layout_width="252dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Country"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/Bio"
+        android:layout_width="252dp"
+        android:layout_height="127dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Bio"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose photo" />
+
+    <Button
+        android:id="@+id/haveanaccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Already have an account" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:text="Sign up"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up with instagram" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up with VK" />
+
+</LinearLayout>

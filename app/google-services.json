@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "403607123498",
+    "project_id": "nails-90d66",
+    "storage_bucket": "nails-90d66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403607123498:android:b4aec1b70e74c5bc03b553",
+        "android_client_info": {
+          "package_name": "ru.anpalmak.nailfiffing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403607123498-9uluvll4jimi0ma06qabk5kbn80bd4el.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6pOekZoKU1ajXQBjrhRdmWsnL4903sXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403607123498-9uluvll4jimi0ma06qabk5kbn80bd4el.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
