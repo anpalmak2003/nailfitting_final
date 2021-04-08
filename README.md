@@ -11,3 +11,4 @@
 !!!!! https://github.com/ManWingloeng/nailtracking - ccылка на модель, которая исполльзуется в данном приложении, до преобразования в tflitte и квантования
 
 https://colab.research.google.com/drive/1CumJyYdgaLRVsucxV0zBl92Mct7RmC-R?usp=sharing  две попытки добавленрия метадаты
+# nailfitting_final
