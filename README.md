@@ -12,3 +12,4 @@
 
 https://colab.research.google.com/drive/1CumJyYdgaLRVsucxV0zBl92Mct7RmC-R?usp=sharing  две попытки добавленрия метадаты
 # nailfitting_final
+# 333
