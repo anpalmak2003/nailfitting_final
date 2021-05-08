@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ Copyright 2016 The TensorFlow Authors. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+      <org.tensorflow.demo.AutoFitTextureView
+          android:id="@+id/texture"
+          android:layout_width="match_parent"
+          android:layout_height="579dp" />
+
+      <org.tensorflow.demo.OverlayView
+          android:id="@+id/tracking_overlay"
+          android:layout_width="match_parent"
+          android:layout_height="575dp" />
+
+      <org.tensorflow.demo.OverlayView
+          android:id="@+id/debug_overlay"
+          android:layout_width="match_parent"
+          android:layout_height="579dp" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="225dp"
+          android:layout_gravity="bottom"
+          android:gravity="bottom"
+          android:orientation="horizontal">
+
+
+            <ImageButton
+                android:id="@+id/blue"
+                android:layout_width="75dp"
+                android:layout_height="156dp"
+                android:layout_gravity="bottom|end"
+
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nailsblue" />
+
+            <ImageButton
+                android:id="@+id/purpure"
+                android:layout_width="75dp"
+                android:layout_height="156dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nailspurpure" />
+
+            <ImageButton
+                android:id="@+id/red"
+                android:layout_width="75dp"
+                android:layout_height="156dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:foregroundGravity="bottom"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nailsred" />
+
+            <ImageButton
+                android:id="@+id/violet"
+                android:layout_width="75dp"
+                android:layout_height="156dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:foregroundGravity="bottom"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nailsviolet" />
+
+            <ImageButton
+                android:id="@+id/black"
+                android:layout_width="70dp"
+                android:layout_height="156dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nailsblack" />
+      </LinearLayout>
+
+</FrameLayout>
+
+
+
