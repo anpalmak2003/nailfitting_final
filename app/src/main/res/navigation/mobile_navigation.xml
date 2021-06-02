@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mobile_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="ru.anpalmak.nailfiffing.DesignView.DesignListFragment"
+        android:label="@string/homePage">
+
+        <action
+            android:id="@+id/action_nav_home_to_nav_liked"
+            app:destination="@id/nav_liked" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_myDesigns"
+            app:destination="@id/nav_myDesigns" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_liked"
+        android:name="ru.anpalmak.nailfiffing.DesignView.LikedListFragment"
+        android:label="@string/liked"
+        tools:layout="@layout/fragment_design_list_list">
+        <action
+            android:id="@+id/action_nav_liked_to_nav_myDesigns"
+            app:destination="@id/nav_myDesigns" />
+        <action
+            android:id="@+id/action_nav_liked_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_myDesigns"
+        android:name="ru.anpalmak.nailfiffing.DesignView.MyDesignsFragment"
+        android:label="@string/myDesigns"
+        tools:layout="@layout/fragment_design_list_list">
+        <action
+            android:id="@+id/action_nav_myDesigns_to_nav_liked"
+            app:destination="@id/nav_liked" />
+        <action
+            android:id="@+id/action_nav_myDesigns_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
 
 </navigation>

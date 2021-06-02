@@ -1,4 +1,4 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.Draw;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -11,7 +11,6 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +18,9 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
-import ru.anpalmak.nailfiffing.draw.FingerPath;
-
-
+/**Рисование*/
 public class DrawPaint extends View {
 
-    public static int BRUSH_SIZE = 20;
     public static final int DEFAULT_COLOR = Color.RED;
     public static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static final float TOUCH_TOLERANCE = 4;
@@ -45,16 +41,10 @@ public class DrawPaint extends View {
     int color= Color.RED;
     int width_brush=5;
     Rect rect;
-Context context;
-    public ImageButton palette;
-    public ImageButton longNail;
-    public Button choseForm;
-    public ImageButton shortNail;
-    public ImageButton drawing;
-float right, top, left, bottom;
-Bitmap canvasBitmap;
-Canvas drawCanvas;
-Paint canvasPaint;
+    float right, top, left, bottom;
+    Bitmap canvasBitmap;
+    Canvas drawCanvas;
+    Paint canvasPaint;
     public DrawPaint(Context context, AttributeSet attrs) {
         super(context, attrs);
         mPaint = new Paint();
@@ -66,11 +56,8 @@ Paint canvasPaint;
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setXfermode(null);
         mPaint.setAlpha(0xff);
-
         mEmboss = new EmbossMaskFilter(new float[] {1, 1, 1}, 0.4f, 6, 3.5f);
         mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
-
-
     }
 
     public DrawPaint(Context context) {
@@ -99,34 +86,7 @@ Paint canvasPaint;
         emboss = false;
         blur = false;
     }
-    public void size_normal() {
-        strokeWidth = 10;
-    }
-    public void size_big() {
-        strokeWidth = 15;
-    }
-    public void size_small() {
-        strokeWidth = 5;
-    }
-    public void color_green() {
-        currentColor = Color.GREEN;
-    }
-    public void color_red() {
-        currentColor = Color.RED;
-    }
-    public void color_black() {
-        currentColor = Color.BLACK;
-    }
 
-    public void emboss() {
-        emboss = true;
-        blur = false;
-    }
-
-    public void blur() {
-        emboss = false;
-        blur = true;
-    }
 
     public void clear() {
         backgroundColor = DEFAULT_BG_COLOR;
@@ -145,7 +105,6 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.save();
-       // mCanvas.drawColor(backgroundColor);
         drawCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         drawCanvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
 
@@ -162,12 +121,12 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
             else if (fp.blur)
                 mPaint.setMaskFilter(mBlur);
 
-if(mBitmap!=null) {           mCanvas.drawPath(fp.path, mPaint);
-                              drawCanvas.drawPath(fp.path, mPaint);}
-
+           if(mBitmap!=null) {
+               mCanvas.drawPath(fp.path, mPaint);
+               drawCanvas.drawPath(fp.path, mPaint);}
         }
-
-if(mBitmap!=null)      {  canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
+        if(mBitmap!=null){
+    canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
     drawCanvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);}
         canvas.restore();
     }

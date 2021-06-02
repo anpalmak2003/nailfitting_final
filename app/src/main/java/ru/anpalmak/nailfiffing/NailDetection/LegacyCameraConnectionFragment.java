@@ -1,4 +1,4 @@
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
 /*
  * Copyright 2017 The TensorFlow Authors. All Rights Reserved.
@@ -44,8 +44,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import java.nio.ByteBuffer;
-import org.tensorflow.demo.env.ImageUtils;
-import org.tensorflow.demo.env.Logger;
+import ru.anpalmak.nailfiffing.NailDetection.env.ImageUtils;
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
 import android.app.Fragment;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -64,10 +64,12 @@ import android.widget.Button;
 
 import java.io.IOException;
 import java.util.List;
-import org.tensorflow.demo.env.ImageUtils;
-import org.tensorflow.demo.env.Logger;
-import org.tensorflow.demo.R; // Explicit import needed for internal Google builds.
+import ru.anpalmak.nailfiffing.NailDetection.env.ImageUtils;
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
+import ru.anpalmak.nailfiffing.R; // Explicit import needed for internal Google builds.
 
+
+@SuppressLint("ValidFragment")
 public class LegacyCameraConnectionFragment extends Fragment {
   private Camera camera;
   private static final Logger LOGGER = new Logger();
@@ -176,7 +178,7 @@ public class LegacyCameraConnectionFragment extends Fragment {
     return inflater.inflate(layout, container, false);
   }
 
- //@SuppressLint("WrongViewCast")
+ @SuppressLint("WrongViewCast")
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
 

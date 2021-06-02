@@ -1,4 +1,4 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.Draw;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,9 +13,11 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import ru.anpalmak.nailfiffing.R;
+/**Настройка ногтя*/
 public class DrawNail extends View {
 float bottom; float right; float left; float top; float height; float widht;
-    Bitmap form= BitmapFactory.decodeResource(getResources(), R.drawable.balelerina);
+    Bitmap form= BitmapFactory.decodeResource(getResources(), R.drawable.balelerinaex);
     Rect clip;RectF rect=null;
     Paint paint = new Paint();
     Bitmap canvasBitmap;

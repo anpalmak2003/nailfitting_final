@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.util.Size;
@@ -35,13 +33,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
-import org.tensorflow.demo.OverlayView.DrawCallback;
-import org.tensorflow.demo.env.BorderedText;
-import org.tensorflow.demo.env.ImageUtils;
-import org.tensorflow.demo.env.Logger;
-import org.tensorflow.demo.tracking.MultiBoxTracker;
-
-import static org.tensorflow.demo.CameraConnectionFragment.number;
+import ru.anpalmak.nailfiffing.NailDetection.OverlayView.DrawCallback;
+import ru.anpalmak.nailfiffing.NailDetection.env.ImageUtils;
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
+import ru.anpalmak.nailfiffing.NailDetection.tracking.MultiBoxTracker;
+import ru.anpalmak.nailfiffing.R;
+import static ru.anpalmak.nailfiffing.DesignView.ViewHolder.image;
 
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
@@ -51,10 +48,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       "file:///android_asset/frozen_inference_graph.pb";
   private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/label.txt";
 
-  private enum DetectorMode {
-    TF_OD_API
-  }
-  private static final DetectorMode MODE = DetectorMode.TF_OD_API;
+
+
 
   private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.4f;
 
@@ -84,14 +79,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private byte[] luminanceCopy;
 
-  private BorderedText borderedText;
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
-    final float textSizePx =
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
-    borderedText = new BorderedText(textSizePx);
-    borderedText.setTypeface(Typeface.MONOSPACE);
 
     tracker = new MultiBoxTracker(this);
 
@@ -133,19 +122,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         new DrawCallback() {
           @Override
           public void drawCallback(final Canvas canvas) {
-           if(number==0){
-            tracker.drawred(canvas);}
-           if(number==1)
-           {tracker.drawblue(canvas);}
-            if(number==2)
-            {tracker.drawblack(canvas);}
-            if(number==3)
-            {tracker.drawpurpure(canvas);}
-            if(number==4)
-            {tracker.drawviolet(canvas);}
-            if (isDebug()) {
-              tracker.drawDebug(canvas);
-            }
+            tracker.TryNail(canvas, image);
           }
         });
 
@@ -188,7 +165,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             lines.add("Rotation: " + sensorOrientation);
             lines.add("Inference time: " + lastProcessingTimeMs + "ms");
 
-            borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
           }
         });
   }

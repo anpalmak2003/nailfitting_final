@@ -1,14 +1,10 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.DesignView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,24 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 
-//import ru.anpalmak.nailfiffing.dummy.DummyContent;
-
-import static androidx.camera.core.CameraX.getContext;
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+import ru.anpalmak.nailfiffing.R;
+import ru.anpalmak.nailfiffing.Draw.ImageNailInfo;
 
 /**
  * A fragment representing a list of Items.
@@ -44,7 +34,6 @@ public class MyDesignsActivity extends AppCompatActivity {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    DatabaseReference mDataReference;
     private FirebaseRecyclerAdapter mAdapter;
     ListView DesignListView;
     Query query;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,8 +24,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -45,6 +46,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -53,9 +55,16 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
+import static ru.anpalmak.nailfiffing.DesignView.ViewHolder.image;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -64,19 +73,21 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import org.tensorflow.demo.env.Logger;
-import org.tensorflow.demo.R; // Explicit import needed for internal Google builds.
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
+import ru.anpalmak.nailfiffing.R; // Explicit import needed for internal Google builds.
 
+@SuppressLint("ValidFragment")
 public class CameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
   public static int number;
-  ImageButton blue; ImageButton purpure; ImageButton violet; ImageButton black;ImageButton red;
+  public static Bitmap currentDesign;
+ Button random;
   /**
    * The camera preview size will be chosen to be the smallest frame by pixel size capable of
    * containing a DESIRED_SIZE x DESIRED_SIZE square.
    */
   private static final int MINIMUM_PREVIEW_SIZE = 320;
-
+public int i;
   /**
    * Conversion from screen rotation to JPEG orientation.
    */
@@ -236,6 +247,7 @@ public class CameraConnectionFragment extends Fragment {
 
   private final ConnectionCallback cameraConnectionCallback;
 
+  @SuppressLint("ValidFragment")
   private CameraConnectionFragment(
           final ConnectionCallback connectionCallback,
           final OnImageAvailableListener imageListener,
@@ -326,6 +338,7 @@ public class CameraConnectionFragment extends Fragment {
   @Override
   public View onCreateView(
           final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+
     return inflater.inflate(layout, container, false);
 
   }
@@ -333,42 +346,69 @@ public class CameraConnectionFragment extends Fragment {
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+    random=view.findViewById(R.id.random);
+    random.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
 
-    blue = (ImageButton) view.findViewById(R.id.blue);
-    red = (ImageButton) view.findViewById(R.id.red);
-    violet = (ImageButton) view.findViewById(R.id.violet);
-    purpure = (ImageButton) view.findViewById(R.id.purpure);
-    black = (ImageButton) view.findViewById(R.id.black);
-    blue.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        number=1;
-        Toast.makeText(getActivity().getApplicationContext(),"blue", Toast.LENGTH_SHORT).show();
+        getRandomDesign();
+
       }});
-    black.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        number=2;
-        Toast.makeText(getActivity().getApplicationContext(),"black", Toast.LENGTH_SHORT).show();
-      }});
-    red.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        number=0;
-        Toast.makeText(getActivity().getApplicationContext(),"red", Toast.LENGTH_SHORT).show();
-      }});
-    purpure.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        number=3;
-        Toast.makeText(getActivity().getApplicationContext(),"purpure", Toast.LENGTH_SHORT).show();
-      }});
-    violet.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        number=4;
-        Toast.makeText(getActivity().getApplicationContext(),"violet", Toast.LENGTH_SHORT).show();
-      }});
+
+  }
+public void getRandomDesign()
+{
+  DatabaseReference fbDb = FirebaseDatabase.getInstance("https://nails-90d66-default-rtdb.europe-west1.firebasedatabase.app/").
+        getReference("images").child("public");
+  final int[] size = new int[1];
+  fbDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+              size[0] = (int) dataSnapshot.getChildrenCount();
+              i=0;
+              int random= (int) (Math.random() * ++size[0]);
+              fbDb.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                  Log.e("Count " ,""+snapshot.getChildrenCount());
+                  for (DataSnapshot data: snapshot.getChildren()) {
+                    i++;
+                    if(i==random){
+                      getDesign(data.child("url").getValue().toString());
+                      break;}
+                  }
+                }
+                @Override
+                public void onCancelled(DatabaseError firebaseError) {
+                  Log.e("The read failed: " ,firebaseError.getMessage());
+                }
+              });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+          });
+
+  //return design;
+}
+
+  public Bitmap bitmap;
+  public void getDesign(String url)
+  {
+    Thread thread = new Thread() {
+      public void run() {
+        try {
+          image= Picasso.with(getActivity())
+                  .load(url).get();
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    };
+    thread.start();
+
   }
 
   @Override
@@ -457,6 +497,7 @@ public class CameraConnectionFragment extends Fragment {
   /**
    * Opens the camera specified by {@link CameraConnectionFragment#cameraId}.
    */
+  @SuppressLint("MissingPermission")
   private void openCamera(final int width, final int height) {
     setUpCameraOutputs();
     configureTransform(width, height);

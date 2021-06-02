@@ -1,4 +1,4 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.SignUpIn;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.content.Context;
 
 import java.util.ArrayList;
+
+import ru.anpalmak.nailfiffing.R;
+import ru.anpalmak.nailfiffing.SignUpIn.CropOption;
 
 /**
  * Adapter for crop option list.

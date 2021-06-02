@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -44,9 +44,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 import java.nio.ByteBuffer;
-import org.tensorflow.demo.env.ImageUtils;
-import org.tensorflow.demo.env.Logger;
-import org.tensorflow.demo.R; // Explicit import needed for internal Google builds.
+import ru.anpalmak.nailfiffing.NailDetection.env.ImageUtils;
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
+import ru.anpalmak.nailfiffing.R; // Explicit import needed for internal Google builds.
 
 public abstract class CameraActivity<blue> extends Activity
     implements OnImageAvailableListener, Camera.PreviewCallback {

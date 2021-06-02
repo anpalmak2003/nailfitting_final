@@ -1,17 +1,18 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.DesignView;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,17 +20,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import ru.anpalmak.nailfiffing.DownloadImageTask;
+import ru.anpalmak.nailfiffing.Draw.ImageNailInfo;
 import ru.anpalmak.nailfiffing.NailDetection.DetectorActivity;
+import ru.anpalmak.nailfiffing.R;
 
 import static android.graphics.Color.RED;
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView nailDesign;
     Button username;
     TextView designName;
-    TextView access;
-    Button like;
+    ImageView access;
+    ImageButton like;
     String url;
     public static Bitmap image;
     Button tryOn;
@@ -42,9 +45,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         designName = itemView.findViewById(R.id.design_name);
         access=itemView.findViewById(R.id.access);
         like=itemView.findViewById(R.id.like);
-        if(like!=null) setLike();
-
-
+        if(like!=null&&FirebaseAuth.getInstance().getCurrentUser()!=null) setLike();
     }
 
 public void setLike()
@@ -55,9 +56,10 @@ public void setLike()
         public void onDataChange(DataSnapshot dataSnapshot) {
             for(DataSnapshot data: dataSnapshot.getChildren()){
                 if (data.child("url").getValue().equals(url)) {
-                    like.setBackgroundColor(RED);
+                     like.setImageResource(R.drawable.ic_baseline_favorite_24);
+
                 } else {
-                    //do something if not exists
+
                 }
             }
         }
@@ -73,7 +75,8 @@ public void setLike()
 
 
             String key = mDataReference.push().getKey();
-            like.setBackgroundColor(RED);
+            like.setImageResource(R.drawable.ic_baseline_favorite_24);
+
             FirebaseDatabase.getInstance("https://nails-90d66-default-rtdb.europe-west1.firebasedatabase.app/").
                     getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()).child("Liked").
                     child(designName.getText().toString()+username.getText().toString()).setValue(new ImageNailInfo(url, username.getText().toString(), designName.getText().toString(), null ))
@@ -85,8 +88,8 @@ public void setLike()
         username.setText(text);
     }
     public void setAccess(String text)
-    {
-        access.setText(text);
+    {if(text.equals("public"))
+        access.setImageResource(R.drawable.ic_baseline_lock_open_24);
     }
     public void setDesignName(String text)
     {

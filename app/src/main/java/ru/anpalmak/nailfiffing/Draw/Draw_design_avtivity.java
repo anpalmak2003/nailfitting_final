@@ -1,7 +1,8 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.Draw;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
@@ -15,6 +16,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,10 +50,11 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import ru.anpalmak.nailfiffing.R;
+import ru.anpalmak.nailfiffing.RequestPermissionHandler;
 import top.defaults.colorpicker.ColorPickerPopup;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.app.PendingIntent.getActivity;
 
 public class Draw_design_avtivity extends AppCompatActivity {
     private float bottom, left, right, top=0;
@@ -70,7 +73,6 @@ public class Draw_design_avtivity extends AppCompatActivity {
     public ImageButton drawing;
     int strokeWight=5;
     private DrawPaint paintView;
-    boolean drawOff=true;
     int strokeColor= Color.RED;
     ImageButton save;
     StorageReference fileRef;
@@ -79,6 +81,8 @@ public class Draw_design_avtivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#232F34")));
 
 
         mRequestPermissionHandler = new RequestPermissionHandler();
@@ -90,7 +94,7 @@ public class Draw_design_avtivity extends AppCompatActivity {
         height =displaymetrics.heightPixels;
         width =displaymetrics.widthPixels;
 
-save=(ImageButton) findViewById(R.id.save);
+        save=(ImageButton) findViewById(R.id.save);
 
         save.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -259,7 +263,7 @@ if(top==0){
         balerina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                form= BitmapFactory.decodeResource(getResources(), R.drawable.balelerina);
+                form= BitmapFactory.decodeResource(getResources(), R.drawable.balelerinaex);
                 draw.setForm(form);
 
 
@@ -426,11 +430,7 @@ if(top==0){
 
     }
 
-
-
-
-
-    public void uploadImageToStorage(Bitmap bitmap, String imageName, String access)
+ public void uploadImageToStorage(Bitmap bitmap, String imageName, String access)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -459,13 +459,6 @@ if(top==0){
                         else Toast.makeText(Draw_design_avtivity.this, "Saved as draft", Toast.LENGTH_SHORT).show();
                     }
                 });
-              /*  if(downloadUri.isSuccessful()){
-                    url = downloadUri.getResult().toString();
-                    uploadImageToDatabase(url, FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), imageName);
-                   if(access.equals("public")) Toast.makeText(Draw_design_avtivity.this, "Published", Toast.LENGTH_SHORT).show();
-                   else Toast.makeText(Draw_design_avtivity.this, "Saved as draft", Toast.LENGTH_SHORT).show();
-                }*/
-
 
             }
         });
@@ -512,25 +505,8 @@ public void addMetadata(String imageName, String access)
 
         MediaStore.Images.Media.insertImage(getContentResolver(), saveNail, "nail" , "nails");
 
-       // uploadImageToStorage(saveNail);
     }
 
-    private void handleButtonClicked(){
-        mRequestPermissionHandler.requestPermission(this, new String[] {
-                WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-        }, 123, new RequestPermissionHandler.RequestPermissionListener() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(Draw_design_avtivity.this, "request permission success", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailed() {
-                Toast.makeText(Draw_design_avtivity.this, "request permission failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -607,7 +583,7 @@ public void showSaveDialog(){
                 uploadImageToStorage(saveNail, enterDesignName.getText().toString(), "draft");
                 try {
                     saveCanvasImage();
-                   // Toast.makeText(Draw_design_avtivity.this, "Saved as draft", Toast.LENGTH_SHORT).show();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -627,7 +603,7 @@ public void showSaveDialog(){
                 uploadImageToStorage(saveNail, enterDesignName.getText().toString(), "public");
                 try {
                     saveCanvasImage();
-                 //   Toast.makeText(Draw_design_avtivity.this, "Published", Toast.LENGTH_SHORT).show();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme.ObjectDetection" parent="Theme.AppCompat.Light.NoActionBar">
@@ -7,5 +7,49 @@
         <item name="colorPrimaryDark">@color/tfe_color_primary_dark</item>
         <item name="colorAccent">@color/white</item>
     </style>
+    <style name="Widget.MaterialComponents.Button" parent="Widget.AppCompat.Button">
+        <item name="enforceMaterialTheme">true</item>
+        <item name="enforceTextAppearance">true</item>
+        <item name="android:textAppearance">?attr/textAppearanceButton</item>
+        <item name="android:textColor">@color/mtrl_btn_text_color_selector</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_padding_right</item>
+        <item name="android:paddingTop">@dimen/mtrl_btn_padding_top</item>
+        <item name="android:paddingBottom">@dimen/mtrl_btn_padding_bottom</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">@dimen/mtrl_btn_inset</item>
+        <item name="android:insetBottom">@dimen/mtrl_btn_inset</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">@animator/mtrl_btn_state_list_anim</item>
+        <item name="cornerRadius">@null</item>
+        <item name="elevation">@dimen/mtrl_btn_elevation</item>
+        <item name="iconPadding">@dimen/mtrl_btn_icon_padding</item>
+        <item name="iconTint">@color/mtrl_btn_text_color_selector</item>
+        <item name="rippleColor">@color/mtrl_btn_ripple_color</item>
+        <item name="backgroundTint">@color/mtrl_btn_bg_color_selector</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+    </style>
+    <style name="Widget.MaterialComponents.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_padding_right</item>
+        <item name="strokeColor">@color/mtrl_btn_stroke_color_selector</item>
+        <item name="strokeWidth">@dimen/mtrl_btn_stroke_size</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

@@ -7,9 +7,49 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="back">#C6C4C4</color>
     <color name="tfe_color_primary">#ffa800</color>
     <color name="tfe_color_primary_dark">#ff6f00</color>
     <color name="tfe_color_accent">#425066</color>
 
     <color name="tfe_semi_transparent">#66000000</color>
+    <color name="colorPrimary">#4A6572</color>
+    <color name="colorPrimaryDark">#232F34</color>
+    <color name="colorAccent">#F9AA33</color>
+
+    <array name="themeColors">
+        <item>@color/green_500</item>
+        <item>@color/blue_500</item>
+        <item>@color/red_500</item>
+        <item>#C6C4C4</item>
+        <item>@color/orange_500</item>
+    </array>
+
+    <string-array name="themeColorHex">
+        <item>#f6e58d</item>
+        <item>#ffbe76</item>
+        <item>#ff7979</item>
+        <item>#badc58</item>
+        <item>#dff9fb</item>
+        <item>#7ed6df</item>
+        <item>#e056fd</item>
+        <item>#686de0</item>
+        <item>#30336b</item>
+        <item>#95afc0</item>
+    </string-array>
+
+    <string-array name="greyHex">
+        <item>@color/grey_50</item>
+        <item>@color/grey_100</item>
+        <item>@color/grey_200</item>
+        <item>@color/grey_300</item>
+        <item>@color/grey_400</item>
+        <item>@color/grey_500</item>
+        <item>@color/grey_600</item>
+        <item>@color/grey_700</item>
+        <item>@color/grey_800</item>
+        <item>@color/grey_900</item>
+        <item>@color/black</item>
+    </string-array>
+
 </resources>

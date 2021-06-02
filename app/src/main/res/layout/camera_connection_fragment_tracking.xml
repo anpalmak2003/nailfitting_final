@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
- Copyright 2016 The TensorFlow Authors. All Rights Reserved.
+< Copyright 2016 The TensorFlow Authors. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -18,79 +18,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-      <org.tensorflow.demo.AutoFitTextureView
+      <ru.anpalmak.nailfiffing.NailDetection.AutoFitTextureView
           android:id="@+id/texture"
-          android:layout_width="match_parent"
-          android:layout_height="579dp" />
+          android:layout_width="wrap_content"
+          android:layout_height="600dp" />
 
-      <org.tensorflow.demo.OverlayView
+      <ru.anpalmak.nailfiffing.NailDetection.OverlayView
           android:id="@+id/tracking_overlay"
           android:layout_width="match_parent"
-          android:layout_height="575dp" />
+          android:layout_height="600dp" />
 
-      <org.tensorflow.demo.OverlayView
+      <ru.anpalmak.nailfiffing.NailDetection.OverlayView
           android:id="@+id/debug_overlay"
           android:layout_width="match_parent"
-          android:layout_height="579dp" />
+          android:layout_height="600dp" />
 
-      <LinearLayout
+      <Button
+          android:id="@+id/random"
           android:layout_width="match_parent"
-          android:layout_height="225dp"
-          android:layout_gravity="bottom"
-          android:gravity="bottom"
-          android:orientation="horizontal">
-
-
-            <ImageButton
-                android:id="@+id/blue"
-                android:layout_width="75dp"
-                android:layout_height="156dp"
-                android:layout_gravity="bottom|end"
-
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nailsblue" />
-
-            <ImageButton
-                android:id="@+id/purpure"
-                android:layout_width="75dp"
-                android:layout_height="156dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nailspurpure" />
-
-            <ImageButton
-                android:id="@+id/red"
-                android:layout_width="75dp"
-                android:layout_height="156dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:foregroundGravity="bottom"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nailsred" />
-
-            <ImageButton
-                android:id="@+id/violet"
-                android:layout_width="75dp"
-                android:layout_height="156dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:foregroundGravity="bottom"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nailsviolet" />
-
-            <ImageButton
-                android:id="@+id/black"
-                android:layout_width="70dp"
-                android:layout_height="156dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nailsblack" />
-      </LinearLayout>
-
+          android:layout_height="130dp"
+          android:background="@drawable/button"
+          android:layout_gravity="bottom|center"
+          android:gravity="center"
+          android:text="@string/random" />
 </FrameLayout>
+
 
 
 

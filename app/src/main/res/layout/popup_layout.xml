@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/popup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/squareform"
+
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/square" />
+
+        <ImageButton
+            android:id="@+id/sharpform"
+
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/sharp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/ovalform"
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/oval" />
+
+        <ImageButton
+            android:id="@+id/roundform"
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/round" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/extrasharpform"
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/extrasharp" />
+
+        <ImageButton
+            android:id="@+id/balerinaform"
+            android:layout_width="75dp"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/balelerinaex" />
+    </TableRow>
+</TableLayout>

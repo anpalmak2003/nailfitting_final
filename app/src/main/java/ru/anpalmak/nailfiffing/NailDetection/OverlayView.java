@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A simple View providing a render callback to other classes.
+ * Простое представление, обеспечивающее обратный вызов отрисовки для других классов.
  */
 public class OverlayView extends View {
   private final List<DrawCallback> callbacks = new LinkedList<DrawCallback>();
@@ -33,7 +33,7 @@ public class OverlayView extends View {
   }
 
   /**
-   * Interface defining the callback for client classes.
+   * Интерфейс, определяющий обратный вызов для клиентских классов.
    */
   public interface DrawCallback {
     public void drawCallback(final Canvas canvas);

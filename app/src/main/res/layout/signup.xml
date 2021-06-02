@@ -5,14 +5,19 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/usernameInput"
         android:layout_width="252dp"
         android:layout_height="58dp"
         android:layout_gravity="center"
         android:ems="10"
-        android:hint="Nickname"
-        android:inputType="textPersonName" />
+        android:hint="Username"
+        android:inputType="textFilter"
+        android:digits="@string/myAlphaNumeric" />
     <EditText
         android:id="@+id/mail"
         android:layout_width="252dp"
@@ -29,53 +34,37 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName" />
-    <EditText
-        android:id="@+id/country"
-        android:layout_width="252dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:hint="Country"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/Bio"
-        android:layout_width="252dp"
-        android:layout_height="127dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:hint="Bio"
-        android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:id="@+id/photo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose photo" />
+        android:layout_gravity="center"
+        android:background="@drawable/button"
+        android:text="Choose photo"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/haveanaccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have an account" />
+        android:background="?attr/selectableItemBackground"
+        android:text="Already have an account"
+        android:textColor="@color/colorAccent" />
 
     <Button
         android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="94dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/button"
         android:text="Sign up"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/button10"
+    <TextView
+        android:id="@+id/errorView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign up with instagram" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign up with VK" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

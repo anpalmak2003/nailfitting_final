@@ -1,15 +1,14 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.Draw;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-
-import androidx.annotation.Nullable;
-
+/**
+ Кисть для рисования
+ */
 public class StrokeView extends View {
     Paint p = new Paint();
     int color= Color.RED;
@@ -29,14 +28,7 @@ public class StrokeView extends View {
        this.color=color;
         invalidate();
     }
-
-    public void saveStroke()
-    {
-
-    }
-
-
-    @Override
+ @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 

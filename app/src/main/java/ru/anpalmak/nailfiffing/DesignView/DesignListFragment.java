@@ -1,13 +1,11 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.DesignView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,23 +13,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 
 //import ru.anpalmak.nailfiffing.dummy.DummyContent;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+import ru.anpalmak.nailfiffing.Draw.ImageNailInfo;
+import ru.anpalmak.nailfiffing.R;
+import ru.anpalmak.nailfiffing.WatchProfileActivity;
 
 /**
  * A fragment representing a list of Items.
@@ -80,17 +77,13 @@ Query query;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_design_list_list, container, false);
-        //DesignListView = (ListView) view.findViewById(R.id.list);
+
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
 
         return view;
     }
 
-    private void populateList(String designName, String username, URL nailPhotoDesign) {
-       // ArrayAdapter<NailDesign> saveAdapter = new NailDesignAdapter(this, new NailDesign(designName,username, nailPhotoDesign));
-      //  DesignListView.setAdapter(saveAdapter);
-    }
     @Override
     public void onStart() {
         super.onStart();
@@ -132,16 +125,17 @@ Query query;
         };
         firebaseRecyclerAdapter.startListening();
         @SuppressLint("RestrictedApi")
-       // GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-       // recyclerView.setLayoutManager(gridLayoutManager);
-      //  recyclerView.smoothScrollToPosition(0);
+
         recyclerView.setAdapter(firebaseRecyclerAdapter);
 
     }
 
-
+    public static DesignListFragment newInstance() {
+        DesignListFragment fragment = new DesignListFragment();
+        return fragment;
+    }
 }

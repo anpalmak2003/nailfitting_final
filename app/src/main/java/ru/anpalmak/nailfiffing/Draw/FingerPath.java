@@ -1,7 +1,9 @@
-package ru.anpalmak.nailfiffing.draw;
+package ru.anpalmak.nailfiffing.Draw;
 
 import android.graphics.Path;
-
+/**
+След от рисовния
+ */
 public class FingerPath {
 
     public int color;

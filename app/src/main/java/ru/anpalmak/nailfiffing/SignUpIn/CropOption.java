@@ -1,4 +1,4 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.SignUpIn;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 

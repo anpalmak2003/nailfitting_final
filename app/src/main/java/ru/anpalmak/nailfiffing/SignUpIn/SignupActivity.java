@@ -1,17 +1,15 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.SignUpIn;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -21,10 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -37,22 +35,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.tensorflow.lite.schema.Model;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-//import ru.anpalmak.nailfiffing.ui.login.LoginActivity;
+import ru.anpalmak.nailfiffing.R;
+
 
 public class SignupActivity extends AppCompatActivity {
-    String email, username, bio=null, photo=null;
+    String email, username, photo=null;
     private static final String TAG = "SignUpActivity";
     public FirebaseAuth mAuth;
     Button signUpButton;
     Button logInButton;
-    Button signUpGoogleButton;
     Button choosePhotoButton;
     EditText userNameInput;
     EditText emailInput;
@@ -74,15 +68,15 @@ public class SignupActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#232F34")));
         mAuth = FirebaseAuth.getInstance();
         logInButton = findViewById(R.id.haveanaccount);
         signUpButton = findViewById(R.id.signup);
-        //signUpGoogleButton=findViewById(R.id.google);
         choosePhotoButton = findViewById(R.id.photo);
         userNameInput = findViewById(R.id.usernameInput);
         emailInput = findViewById(R.id.mail);
         passwordInput = findViewById(R.id.password);
-
         errorView = findViewById(R.id.errorView);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -93,35 +87,25 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-
             }
         });
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent myIntent = new Intent(SignupActivity.this, SignInActivity.class);
                 startActivity(myIntent);
-
             }
         });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              /*  Intent myIntent = new Intent(SignupActivity.this, MainPageActivity.class);
-                startActivity(myIntent);*/
-
                 if (CheckEditTextIsEmptyOrNot()) {
                     CreateRegistration();
                     addUserToDatabase();}
-
             }
         });
-
-
     }
 
     @Override
@@ -133,29 +117,9 @@ public class SignupActivity extends AppCompatActivity {
            extras = data.getExtras();
             if (extras != null)
                  photo = extras.getParcelable("data");
-           /* if (data != null) {
-
-                Bundle bundle = data.getExtras();
-
-                Bitmap bitmap = bundle.getParcelable("data");
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), bitmap, "Title", null);
-                selectedImage= Uri.parse(path);
-            }*/
-                //mImageView.setImageBitmap(photo);
-
-          /*  String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
-
-        }
+            }
     }
+    /**Метод, который позволяет обрезать изобжадение*/
     private void doCrop() {
         final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
 
@@ -180,7 +144,6 @@ public class SignupActivity extends AppCompatActivity {
             intent.putExtra("scale", true);
             intent.putExtra("return-data", true);
 
-         //   selectedImage=intent.getData();
             if (size == 1) {
                 Intent i = new Intent(intent);
                 ResolveInfo res = list.get(0);
@@ -214,7 +177,6 @@ public class SignupActivity extends AppCompatActivity {
                 builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-
                         if (selectedImage!= null) {
                             getContentResolver().delete(selectedImage, null, null);
                             selectedImage = null;
@@ -225,10 +187,11 @@ public class SignupActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
 
                 alert.show();
-
             }
         }
     }
+
+    /**Проверка заполненности полей*/
 public boolean CheckEditTextIsEmptyOrNot(){
 
     if (userNameInput.getText().toString().contentEquals("")) {
@@ -243,18 +206,18 @@ public boolean CheckEditTextIsEmptyOrNot(){
     }
     else return true;
 }
+    /**Регистрация пользователя*/
 public void CreateRegistration(){
-    mAuth.createUserWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+    mAuth.createUserWithEmailAndPassword(emailInput.getText().
+            toString(), passwordInput.getText().toString()).
+            addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) {
-
             if (task.isSuccessful()) {
-                // Sign in success, update UI with the signed-in user's information
                 Log.d(TAG, "createUserWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(userNameInput.getText().toString())
-                        //  .setPhotoUri(selectedImage)
                         .build();
                 user.updateProfile(profileUpdates)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -277,10 +240,8 @@ public void CreateRegistration(){
                                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                                     SignupActivity.this);
 
-                                            // set title
                                             alertDialogBuilder.setTitle(user.getDisplayName() + ", Please Verify Your EmailID");
 
-                                            // set dialog message
                                             alertDialogBuilder
                                                     .setMessage("A verification Email Is Sent To Your Registered EmailID, please click on the link and Sign in again!")
                                                     .setCancelable(false)
@@ -293,14 +254,8 @@ public void CreateRegistration(){
                                                         }
                                                     });
 
-                                            // create alert dialog
                                             AlertDialog alertDialog = alertDialogBuilder.create();
-
-                                            // show it
-                                            alertDialog.show();
-
-
-                                        }
+                                            alertDialog.show();}
                                     }
                                 });
 
@@ -308,43 +263,28 @@ public void CreateRegistration(){
                     errorView.setText(e.getMessage());
                 }
             } else {
-                // If sign in fails, display a message to the user.
                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                 Toast.makeText(SignupActivity.this, "Authentication failed.",
                         Toast.LENGTH_SHORT).show();
 
                 if (task.getException() != null) {
                     errorView.setText(task.getException().getMessage());
-                }
-
-            }
-
-        }
-    });
-
+                }}}});
 }
 
-
+    /**Добавление пользователя в базу данных*/
 public void addUserToDatabase(){
         username=userNameInput.getText().toString();
         email=emailInput.getText().toString();
-
-    currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
     if(selectedImage!=null) uploadToPhotoFirebase(selectedImage);
-
     user = new User(username, email);
-
-        userInformation.child(username).setValue(user);
-
-
-  //  myRef.child("users").child(username).setValue(user);
-   // myRef.child(email).child("username").setValue(username);
+    userInformation.child(username).setValue(user);
 }
+    /**Загрузка фотографии в хранилище*/
     private void uploadToPhotoFirebase(Uri uri){
 
         final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
-        //fileRef.putFile(uri);
-
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
@@ -354,45 +294,11 @@ public void addUserToDatabase(){
                     public void onSuccess(Uri uri) {
                         userPhoto = uri.toString();
                         userInformation.child(username).child("photo").setValue(userPhoto);
-                        //Do what you want with the url
-                    }
-       // Toast.(SignupActivity.this, "Upload Done", Toast.LENGTH_LONG).show();
-                }
+                    }}
             );
         }});}
 
-
-
-             /*   .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {*/
-            //   uri=fileRef.getDownloadUrl();
-                        /*.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-*/
-                    //    userPhoto = fileRef.getDownloadUrl().toString();
-                     /*   user = new User(username, email, bio, userPhoto);
-                        if (currentUser != null) {
-                            userInformation.child(currentUser.getUid()).setValue(user);
-                        }*/
-                       // String modelId = root.push().getKey();
-                       // user.addPhoto(model);
-                       /* progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(MainActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                        imageView.setImageResource(R.drawable.ic_baseline_add_photo_alternate_24);*/
-   /*                 }
-                });
-            }
-        })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-               // progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(SignupActivity.this, "Uploading photo Failed !!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
+    /**Получить ссылку на фото*/
     private String getFileExtension(Uri mUri){
 
         ContentResolver cr = getContentResolver();

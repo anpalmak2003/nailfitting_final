@@ -1,7 +1,7 @@
-package ru.anpalmak.nailfiffing;
+package ru.anpalmak.nailfiffing.Draw;
 
 import com.google.firebase.database.IgnoreExtraProperties;
-
+/**Информация об изображении*/
 @IgnoreExtraProperties
 public class ImageNailInfo {
    public String url;

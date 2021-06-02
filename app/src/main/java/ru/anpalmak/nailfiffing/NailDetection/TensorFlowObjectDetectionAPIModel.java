@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package org.tensorflow.demo;
+package ru.anpalmak.nailfiffing.NailDetection;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -31,7 +31,7 @@ import java.util.Vector;
 import org.tensorflow.Graph;
 import org.tensorflow.Operation;
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
-import org.tensorflow.demo.env.Logger;
+import ru.anpalmak.nailfiffing.NailDetection.env.Logger;
 
 public class TensorFlowObjectDetectionAPIModel implements Classifier {
   private static final Logger LOGGER = new Logger();
