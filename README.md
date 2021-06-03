@@ -1,4 +1,5 @@
 # nail_fitting
+https://drive.google.com/file/d/1CxNeygWBgAXBhPlzyg4eIRrY71BIcI79/view?usp=sharing -apk файл
 1) Осуществить обнаружение ногтей
 2) Осуществить возвращение вида с камеры с наложенными ногтями
 3) Осуществить функцию рисования дизайна
