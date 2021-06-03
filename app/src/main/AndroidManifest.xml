@@ -44,16 +44,6 @@
 
         </activity>
         <activity
-            android:name=".DesignView.LikedViewActivity"
-            android:label="@string/liked"
-            android:theme="@style/Theme.MaterialComponents"
-            android:exported="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainPageActivity" />
-
-        </activity>
-        <activity
 
             android:name=".MainPageActivity"
             android:label="@string/homePage"
@@ -77,15 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainPageActivity" />
 
-        </activity>
-        <activity
-            android:name=".DesignView.MyDesignsActivity"
-            android:label="@string/myDesigns"
-            android:theme="@style/Theme.Design"
-            android:exported="true">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainPageActivity" />
         </activity>
         <activity
             android:name=".SignUpIn.SignInActivity"

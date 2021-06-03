@@ -83,19 +83,13 @@ public class Draw_design_avtivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#232F34")));
-
-
         mRequestPermissionHandler = new RequestPermissionHandler();
-
-
         setContentView(R.layout.activity_draw_design_avtivity);
         nail=findViewById(R.id.imageView5);
         DisplayMetrics displaymetrics = getResources(). getDisplayMetrics();
         height =displaymetrics.heightPixels;
         width =displaymetrics.widthPixels;
-
         save=(ImageButton) findViewById(R.id.save);
-
         save.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -104,19 +98,13 @@ public class Draw_design_avtivity extends AppCompatActivity {
                     saveNail=combineBitmap(draw.getBitmap(), paintView.getBitmap());
                 else saveNail=draw.getBitmap();
                 saveNail = Bitmap.createBitmap(saveNail,(int) left, (int)top, (int)right-(int)left, (int)bottom-(int)top);
-               showSaveDialog();
-
-
-
-            }
+               showSaveDialog();}
         });
 
         paintView =(DrawPaint) this.findViewById(R.id.view);
-
         palette=(ImageButton) findViewById(R.id.palette);
         draw=(DrawNail)this.findViewById(R.id.nailform);
         longNail=(ImageButton)findViewById(R.id.longnail);
-
         shortNail=(ImageButton)findViewById(R.id.shortnail);
         choseForm=(Button)findViewById(R.id.form);
         drawing=(ImageButton) findViewById(R.id.draw);
@@ -126,25 +114,19 @@ public class Draw_design_avtivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (p != null)
-                    showPopup(Draw_design_avtivity.this, p);
-            }
-                                            });
+                    showPopup(Draw_design_avtivity.this, p);}});
         longNail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(top>bottom - fingerHeight)
          top=top-40;
-         setLength();
-            }
-        });
+         setLength();}});
         shortNail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(top<height - fingerHeight)
                 top=top+40;
-                setLength();
-            }
-        });
+                setLength();}});
         palette.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -173,7 +155,6 @@ public class Draw_design_avtivity extends AppCompatActivity {
         drawing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 paintView.init(height, width);
                 paintView.setVisibility(View.VISIBLE);
                 paintView.setClip(draw.getClip(), left, right, bottom, top);
@@ -187,167 +168,116 @@ public class Draw_design_avtivity extends AppCompatActivity {
                         if(p!=null)
                        showPopupStroke(Draw_design_avtivity.this, p );
                     }
-                });
-
-
-
-
-            }
+                });}
         });
     }
+    /**Настройка координатов ногтя*/
     public void onWindowFocusChanged(boolean hasFocus) {
-        // TODO Auto-generated method stub
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-
            fingerHeight = nail.getHeight();
            fingerWidth = nail.getWidth();
-if(top==0){
+           if(top==0){
             bottom = height - fingerHeight / 3 * 2;
             top = bottom - fingerHeight / 2;
             left = width / 2 - fingerWidth / 3 ;
             right = width / 2 + fingerWidth / 3 ;
-
-            draw.setNail( bottom, right, left, top, fingerHeight, fingerWidth);}
-
-
-        }
+            draw.setNail( bottom, right, left, top, fingerHeight, fingerWidth);}}
         int[] location = new int[2];
-
-
-
         choseForm.getLocationOnScreen(location);
-
-
         p = new Point();
         p.x = location[0];
         p.y = location[1];
-
-
-
-    }
-
+}
+    /**Настройка длины ногтя*/
     public void setLength(){
         draw.setNail( bottom, right, left, top, fingerHeight, fingerWidth);
+}
 
-    }
+    /**Выбор формы ногтей*/
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showPopup(final Activity context, Point p) {
         int popupWidth = 500;
         int popupHeight = 1000;
-
-        // Inflate the popup_layout.xml
         TableLayout viewGroup = (TableLayout) context.findViewById(R.id.popup);
         LayoutInflater layoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.popup_layout, viewGroup);
 
-        // Creating the PopupWindow
         final PopupWindow popup = new PopupWindow(context);
         popup.setContentView(layout);
         popup.setWidth(popupWidth);
         popup.setHeight(popupHeight);
         popup.setFocusable(true);
 
-        // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
         int OFFSET_X = 30;
         int OFFSET_Y = 30;
 
-        // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
 
-        // Displaying the popup at the specified location, + offsets.
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
-
         ImageButton balerina=(ImageButton) layout.findViewById(R.id.balerinaform);
         balerina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.balelerinaex);
-                draw.setForm(form);
-
-
-            }
+                draw.setForm(form);}
         });
         ImageButton extrasharp=(ImageButton) layout.findViewById(R.id.extrasharpform);
         extrasharp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.extrasharp);
-                draw.setForm(form);
-
-
-            }
+                draw.setForm(form);}
         });
         ImageButton round=(ImageButton) layout.findViewById(R.id.roundform);
         round.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.round);
-                draw.setForm(form);
-
-
-            }
+                draw.setForm(form);}
         });
         ImageButton oval=(ImageButton) layout.findViewById(R.id.ovalform);
         oval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.oval);
-                draw.setForm(form);
-
-
-            }
+                draw.setForm(form);}
         });
         ImageButton square=(ImageButton) layout.findViewById(R.id.squareform);
         square.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.square);
-                draw.setForm(form);
-
-
-            }
+                draw.setForm(form);}
         });
         ImageButton sharp=(ImageButton) layout.findViewById(R.id.sharpform);
         sharp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 form= BitmapFactory.decodeResource(getResources(), R.drawable.sharp);
-                draw.setForm(form);
-
-
-            }
-        });
-
-    }
-
+                draw.setForm(form);}
+        });}
+    /**Выбор кисти*/
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showPopupStroke(final Activity context, Point p) {
         int popupWidth = 500;
         int popupHeight = 1000;
-
-        // Inflate the popup_layout.xml
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.popup_stroke);
         LayoutInflater layoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.popup_setting_stroke, viewGroup);
-
-        // Creating the PopupWindow
         final PopupWindow popup = new PopupWindow(context);
         popup.setContentView(layout);
         popup.setWidth(popupWidth);
         popup.setHeight(popupHeight);
         popup.setFocusable(true);
 
-        // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
         int OFFSET_X = 30;
         int OFFSET_Y = 30;
 
-        // Clear the default translucent background
         popup.setBackgroundDrawable(new BitmapDrawable());
 
-        // Displaying the popup at the specified location, + offsets.
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
 
         StrokeView stroke=(StrokeView) layout.findViewById(R.id.stroke_view);
@@ -358,10 +288,7 @@ if(top==0){
             @Override
             public void onClick(View v) {
                 strokeWight=strokeWight+3;
-                stroke.setStrokeWight(strokeWight);
-
-
-            }
+                stroke.setStrokeWight(strokeWight);}
         });
 
 
@@ -370,11 +297,9 @@ if(top==0){
             @Override
             public void onClick(View v) {
                 strokeWight=strokeWight-3;
-                stroke.setStrokeWight(strokeWight);
-
-            }
+                stroke.setStrokeWight(strokeWight);}
         });
-
+        /**Выбор цвета*/
         Button selectColor=(Button) layout.findViewById(R.id.select_color);
         selectColor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,39 +322,29 @@ if(top==0){
                             }
 
 
-                        });
-
-
-            }});
+                        });}});
 
     ImageButton saveStroke=(ImageButton)layout.findViewById(R.id.save_stroke);
         saveStroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 paintView.setColorWidth(strokeColor, strokeWight);
-                popup.dismiss();
-            }
+                popup.dismiss();}
         });
     ImageButton closeStroke=(ImageButton)layout.findViewById(R.id.close_stroke);
         closeStroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               popup.dismiss();
-
-            }
+               popup.dismiss();}
         });
      Button clear=(Button)layout.findViewById(R.id.clear) ;
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 paintView.clear();
-                popup.dismiss();
-
-            }
-        });
-
+                popup.dismiss();} });
     }
-
+    /**Загрузка изображения в хранилище*/
  public void uploadImageToStorage(Bitmap bitmap, String imageName, String access)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -441,9 +356,7 @@ if(top==0){
         UploadTask uploadTask = fileRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
+            public void onFailure(@NonNull Exception exception) {}
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -458,13 +371,9 @@ if(top==0){
                         if(access.equals("public")) Toast.makeText(Draw_design_avtivity.this, "Published", Toast.LENGTH_SHORT).show();
                         else Toast.makeText(Draw_design_avtivity.this, "Saved as draft", Toast.LENGTH_SHORT).show();
                     }
-                });
-
-            }
-        });
-
-
-    }
+                });}
+        });}
+    /**Загрузка изображения в базу данных*/
     public void uploadImageToDatabase(String url, String username, String imageName, String access)
     {
         DatabaseReference mDataReference = FirebaseDatabase.getInstance("https://nails-90d66-default-rtdb.europe-west1.firebasedatabase.app/").getReference("images");
@@ -475,6 +384,7 @@ if(top==0){
             mDataReference.child(username).child("public").child(key).setValue(info);}
          mDataReference.child(username).child("draft").child(key).setValue(info);
     }
+    /**Добавление описания*/
 public void addMetadata(String imageName, String access)
 {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -486,26 +396,18 @@ public void addMetadata(String imageName, String access)
            fileRef.updateMetadata(metadata)
             .addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
                 @Override
-                public void onSuccess(StorageMetadata storageMetadata) {
-                    // Updated metadata is in storageMetadata
-                }
+                public void onSuccess(StorageMetadata storageMetadata) {}
             })
             .addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Uh-oh, an error occurred!
-                }
+                public void onFailure(@NonNull Exception exception) {}
             });
 }
 
-
+    /**Сохранение изображения в галлерею*/
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveCanvasImage() throws IOException {
-
-
-        MediaStore.Images.Media.insertImage(getContentResolver(), saveNail, "nail" , "nails");
-
-    }
+     MediaStore.Images.Media.insertImage(getContentResolver(), saveNail, "nail" , "nails");}
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -514,7 +416,7 @@ public void addMetadata(String imageName, String access)
         mRequestPermissionHandler.onRequestPermissionsResult(requestCode, permissions,
                 grantResults);
     }
-
+    /**Соединение ногтя и рисунка на нем в одно изображение*/
     public static Bitmap combineBitmap(Bitmap background, Bitmap foreground) {
         Bitmap result;
         try {
@@ -546,20 +448,15 @@ public void addMetadata(String imageName, String access)
                 return super.onOptionsItemSelected(item);
         }
     }
+    /**Диалог сохранения*/
 public void showSaveDialog(){
     ViewGroup viewGroup = findViewById(android.R.id.content);
-
-    //then we will inflate the custom alert dialog xml that we created
     View dialogView = LayoutInflater.from(this).inflate(R.layout.save_nail_dialog, viewGroup, false);
 
-
-    //Now we need an AlertDialog.Builder object
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-    //setting the view of the builder to our custom view that we already inflated
     builder.setView(dialogView);
 
-    //finally creating the alert dialog and displaying it
     AlertDialog alertDialog = builder.create();
     alertDialog.show();
     EditText enterDesignName=dialogView.findViewById(R.id.enter_designname);

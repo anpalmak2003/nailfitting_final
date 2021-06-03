@@ -26,7 +26,7 @@ import ru.anpalmak.nailfiffing.NailDetection.DetectorActivity;
 import ru.anpalmak.nailfiffing.R;
 
 import static android.graphics.Color.RED;
-
+/**Адаптер дизайна*/
 public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView nailDesign;
     Button username;
@@ -47,7 +47,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         like=itemView.findViewById(R.id.like);
         if(like!=null&&FirebaseAuth.getInstance().getCurrentUser()!=null) setLike();
     }
-
+    /**Проверка, поставлен ли лайк на этот дизайн*/
 public void setLike()
 {DatabaseReference mDataReference = FirebaseDatabase.getInstance("https://nails-90d66-default-rtdb.europe-west1.firebasedatabase.app/").
         getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()).child("Liked");
@@ -58,60 +58,46 @@ public void setLike()
                 if (data.child("url").getValue().equals(url)) {
                      like.setImageResource(R.drawable.ic_baseline_favorite_24);
 
-                } else {
-
-                }
-            }
-        }
+                } else { }}}
 
         @Override
-        public void onCancelled(DatabaseError firebaseError) {
-
-        }
+        public void onCancelled(DatabaseError firebaseError) {}
     });
     like.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-
             String key = mDataReference.push().getKey();
             like.setImageResource(R.drawable.ic_baseline_favorite_24);
-
             FirebaseDatabase.getInstance("https://nails-90d66-default-rtdb.europe-west1.firebasedatabase.app/").
                     getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()).child("Liked").
                     child(designName.getText().toString()+username.getText().toString()).setValue(new ImageNailInfo(url, username.getText().toString(), designName.getText().toString(), null ))
-            ;
-        }
+            ; }
     });}
+    /**Установка имени пользователя*/
     public void setUsername(String text)
     {
         username.setText(text);
     }
+    /**Установка доступа*/
     public void setAccess(String text)
     {if(text.equals("public"))
         access.setImageResource(R.drawable.ic_baseline_lock_open_24);
     }
+    /**Установка названия дизайна*/
     public void setDesignName(String text)
     {
         designName.setText(text);
     }
+    /**Установка дизайна*/
     public void setImage(String text)
-    {   url=text;
-
-    DownloadImageTask download= new DownloadImageTask(nailDesign);
+    { url=text;
+      DownloadImageTask download= new DownloadImageTask(nailDesign);
       download.execute(text);
-     // image=download.getBitmapDesign();
         tryOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 image=download.getBitmapDesign();
                 Intent intent = new Intent(v.getContext(), DetectorActivity.class);
-                v.getContext().startActivity(intent);
-
-                ;
-            }
-        });
-
-
-    }
+                v.getContext().startActivity(intent);}
+        });}
 }

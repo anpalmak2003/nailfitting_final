@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,8 +28,6 @@ import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,8 +35,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.NavigationUI;
 
-import ru.anpalmak.nailfiffing.DesignView.LikedViewActivity;
-import ru.anpalmak.nailfiffing.DesignView.MyDesignsActivity;
 import ru.anpalmak.nailfiffing.NailDetection.CameraActivity;
 import ru.anpalmak.nailfiffing.NailDetection.DetectorActivity;
 import ru.anpalmak.nailfiffing.SignUpIn.SignupActivity;

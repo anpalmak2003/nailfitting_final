@@ -64,7 +64,7 @@ public class DrawPaint extends View {
         super(context);
 
     }
-
+    /**Настройка цвета и ширины кисти*/
     public void setColorWidth(int color, int width){
         this.currentColor=color;
         this.strokeWidth=width;
@@ -76,24 +76,10 @@ public class DrawPaint extends View {
 
         mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
-
         currentColor = color;
-        strokeWidth = width_brush;
+        strokeWidth = width_brush; }
 
-    }
-
-    public void normal() {
-        emboss = false;
-        blur = false;
-    }
-
-
-    public void clear() {
-        backgroundColor = DEFAULT_BG_COLOR;
-        paths.clear();
-        normal();
-        invalidate();
-    }
+    /**Установка границ*/
 public void setClip(Rect clip, float left, float right, float bottom, float top)
 {
     this.rect=clip;
@@ -107,7 +93,6 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
         canvas.save();
         drawCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         drawCanvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-
         if(rect!=null)
         canvas.clipRect(rect);
         drawCanvas.clipRect(rect);
@@ -130,7 +115,7 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
     drawCanvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);}
         canvas.restore();
     }
-
+    /**Точка начала рисования*/
     private void touchStart(float x, float y) {
         mPath = new Path();
         FingerPath fp = new FingerPath(currentColor, emboss, blur, strokeWidth, mPath);
@@ -141,7 +126,7 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
         mX = x;
         mY = y;
     }
-
+    /**Дальнейший путь рисования*/
     private void touchMove(float x, float y) {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
@@ -152,11 +137,11 @@ public void setClip(Rect clip, float left, float right, float bottom, float top)
             mY = y;
         }
     }
-
+    /**Конец рисования*/
     private void touchUp() {
         mPath.lineTo(mX, mY);
     }
-
+    /**Обработчик касаний*/
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);

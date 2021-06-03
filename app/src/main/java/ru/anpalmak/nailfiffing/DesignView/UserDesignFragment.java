@@ -29,7 +29,7 @@ import ru.anpalmak.nailfiffing.WatchProfileActivity;
 import ru.anpalmak.nailfiffing.Draw.ImageNailInfo;
 
 /**
- * A fragment representing a list of Items.
+ * Фрагмент с дизайнами чужого пользователя
  */
 public class UserDesignFragment extends Fragment {
 
@@ -41,10 +41,7 @@ public class UserDesignFragment extends Fragment {
     String username;
     RecyclerView recyclerView;
     FirebaseRecyclerAdapter firebaseRecyclerAdapter;
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public UserDesignFragment() {
     }
 
@@ -80,7 +77,7 @@ public class UserDesignFragment extends Fragment {
 
         return view;
     }
-
+    /**Загрузка дизайнов*/
     @Override
     public void onStart() {
 

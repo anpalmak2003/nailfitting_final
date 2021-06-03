@@ -25,11 +25,8 @@ float bottom; float right; float left; float top; float height; float widht;
     Paint canvasPaint;
     public DrawNail(Context context, AttributeSet attrs) {
         super(context, attrs);
-        invalidate();
-
-
-    }
-
+        invalidate();}
+    /**Координаты*/
     public void setNail(float bottom, float right, float left, float top, float height, float wight) {
 
         this.bottom=bottom;
@@ -42,11 +39,13 @@ float bottom; float right; float left; float top; float height; float widht;
         invalidate();
 
     }
+    /**Форма*/
     public void setForm(Bitmap form)
     {
         this.form=form;
         invalidate();
     }
+    /**Цвет*/
     public void mainColor(int color)
     {
 
@@ -56,39 +55,32 @@ float bottom; float right; float left; float top; float height; float widht;
     }
 
 
-
+    /**Вырисовка ногтя*/
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         drawCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
         paint.setStyle(Paint.Style.FILL);
         drawCanvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-
-      //  RectF rect = new RectF(left, top, right, bottom);
-if(rect!=null)
+        if(rect!=null)
         drawCanvas.drawBitmap(form, null, rect, paint);
-canvas.drawBitmap(canvasBitmap, 0, 0, paint);
-        clip = new Rect((int)left, (int) top,(int) right,(int) bottom);
-
-    }
+        canvas.drawBitmap(canvasBitmap, 0, 0, paint);
+        clip = new Rect((int)left, (int) top,(int) right,(int) bottom);}
+    /**Получение границ ногтя*/
     public Rect getClip()
     {
         return clip;
     }
 
-
+    /**Смена координат*/
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
-        canvasPaint = new Paint(Paint.DITHER_FLAG);
-    }
-
-
-public Bitmap getBitmap(){
+        canvasPaint = new Paint(Paint.DITHER_FLAG);}
+    /**Получить изображение*/
+     public Bitmap getBitmap(){
         return canvasBitmap;
 }
 

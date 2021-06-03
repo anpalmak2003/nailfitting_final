@@ -31,7 +31,7 @@ import ru.anpalmak.nailfiffing.R;
 import ru.anpalmak.nailfiffing.WatchProfileActivity;
 
 /**
- * A fragment representing a list of Items.
+ * Фрагмент дизайнов в общем доступе
  */
 public class DesignListFragment extends Fragment {
 
@@ -45,14 +45,11 @@ ListView DesignListView;
 Query query;
     RecyclerView recyclerView;
     FirebaseRecyclerAdapter firebaseRecyclerAdapter;
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public DesignListFragment() {
     }
 
-    // TODO: Customize parameter initialization
+
     @SuppressWarnings("unused")
     public static DesignListFragment newInstance(int columnCount) {
         DesignListFragment fragment = new DesignListFragment();
@@ -83,7 +80,7 @@ Query query;
 
         return view;
     }
-
+/**Загрузка дизайнов пользователей*/
     @Override
     public void onStart() {
         super.onStart();

@@ -24,7 +24,7 @@ import ru.anpalmak.nailfiffing.Draw.ImageNailInfo;
 import ru.anpalmak.nailfiffing.R;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
+/**Фрагмент с дизайнами пользователя*/
 public class MyDesignsFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -36,10 +36,7 @@ public class MyDesignsFragment extends Fragment {
     Query query;
     RecyclerView recyclerView;
     FirebaseRecyclerAdapter firebaseRecyclerAdapter;
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public MyDesignsFragment() {
     }
 
@@ -74,7 +71,7 @@ public class MyDesignsFragment extends Fragment {
 
         return view;
     }
-
+    /**Загрузка дизайнов*/
     @Override
     public void onStart() {
         super.onStart();

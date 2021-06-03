@@ -34,7 +34,7 @@ import ru.anpalmak.nailfiffing.WatchProfileActivity;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 /**
- * A fragment representing a list of Items.
+ * Фрагмент дизайнов, которым пользователь поставил лайк
  */
 public class LikedListFragment extends Fragment {
 
@@ -48,10 +48,7 @@ public class LikedListFragment extends Fragment {
     Query query;
     RecyclerView recyclerView;
     FirebaseRecyclerAdapter firebaseRecyclerAdapter;
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public LikedListFragment() {
     }
 
@@ -86,7 +83,7 @@ public class LikedListFragment extends Fragment {
 
         return view;
     }
-
+/**Загрузка дизайнов*/
     @Override
     public void onStart() {
         super.onStart();
